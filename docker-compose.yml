@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  neo4j:
+    image: neo4j
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - ./data/neo4j:/data
+    environment:
+      - NEO4J_AUTH=none
+  
+  mysql:
+    image: mysql
+    build:
+      context: ./
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=workshop
+      - MYSQL_DATABASE=workshop
+      - MYSQL_USER=workshop_user
+      - MYSQL_PASSWORD=workshop
